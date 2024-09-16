@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block page_heading %}
+    Projects
+{% endblock %}
+
+{% block heading_content %}
+<a href="add_project" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Add New Project</a>
+{% endblock %}
+
+{% block page_content %}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Assignment Planner</h6>
+    </div>
+    <div class="card-body">
+        <div class="card mb-1">
+            <div class="card-header">
+                Machine Learning Computing
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="taskDetails">Task Details</label>
+                            <input type="text" class="form-control" id="taskDetails" value="Design and implement a clear and user-friendly menu layout for ordering">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="estimatedDuration">Estimated Duration</label>
+                            <input type="text" class="form-control" id="estimatedDuration" value="2 Days">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="deadline">Deadline</label>
+                            <input type="text" class="form-control" id="deadline" value="10th May 2024">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="taskDescription">Description</label>
+                            <input type="text" class="form-control" id="taskDescription" value="Description">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
