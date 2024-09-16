@@ -10,22 +10,23 @@
 <div class="card shadow">
     <div class="card-body">
         <h5 class="card-title">Enter Project Details</h5>
-        <form class="row g-3">
+        <form method="post" class="row g-3" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="col-6">
                 <label for="inputNanme4" class="form-label">Enter Project Name</label>
-                <input type="text" class="form-control" id="inputNanme4" placeholder="Deep Learning Assignment 3">
+                <input type="text" class="form-control" id="inputNanme4" name="projectName" placeholder="Deep Learning Assignment 3">
             </div>
             <div class="col-6">
                 <label for="inputEfforts" class="form-label">Estimated Efforts</label>
-                <input type="text" class="form-control" id="inputEfforts" placeholder="Estimated required time (days)">
+                <input type="text" class="form-control" id="inputEfforts" name="efforts" placeholder="Estimated required time (days)">
             </div>
             <div class="col-6">
                 <label for="inputDate" class="form-label">Due Date</label>
-                <input type="date" class="form-control" id="inputDate" placeholder="Select Project Due Date">
+                <input type="date" class="form-control" id="inputDate" name="dueDate" placeholder="Select Project Due Date">
             </div>
             <div class="col-6">
                 <label for="formFile" class="form-label">Upload TDD/Project Design</label>
-                <input class="form-control" type="file" id="formFile">
+                <input class="form-control" type="file" id="formFile" name="userFile">
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-success">Create Project Plan</button>
