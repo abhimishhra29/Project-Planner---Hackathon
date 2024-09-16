@@ -23,5 +23,5 @@ from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("study_buddy_app.urls")),
+    path("", include("PlanMyAssignment.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
