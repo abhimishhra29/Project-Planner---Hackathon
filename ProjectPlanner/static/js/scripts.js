@@ -24,3 +24,12 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+function toggleTasks(id) {
+    var taskList = document.getElementById('task-list-' + id);
+    if (taskList.style.display === 'none' || taskList.style.display === '') {
+    taskList.style.display = 'block';
+    } else {
+    taskList.style.display = 'none';
+    }
+}

@@ -1,47 +1,50 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block page_heading %}
-    Projects
+    Projects Summary
 {% endblock %}
 
 {% block heading_content %}
-<a href="add_project" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Add New Project</a>
+    List Projects
 {% endblock %}
 
 {% block page_content %}
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Assignment Planner</h6>
+<div class="container mt-5">
+    <!-- Project Card 1 -->
+    <div class="project-card">
+        <h5 class="mb-0" onclick="toggleTasks(1)" style="cursor: pointer;">
+        Machine Learning Computing
+        </h5>
+        <div id="task-list-1" class="task-list">
+        <ul class="list-group mt-3">
+            <li class="list-group-item">
+                <strong>Task:</strong> Design Menu Layout<br>
+                <strong>Duration:</strong> 2 Days<br>
+                <strong>Deadline:</strong> 10th May 2024
+            </li>
+            <li class="list-group-item">
+                <strong>Task:</strong> Design Menu Layout<br>
+                <strong>Duration:</strong> 2 Days<br>
+                <strong>Deadline:</strong> 10th May 2024
+            </li>
+        </ul>
+        </div>
     </div>
-    <div class="card-body">
-        <div class="card mb-1">
-            <div class="card-header">
-                Machine Learning Computing
-            </div>
-            <div class="card-body">
-                <form>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="taskDetails">Task Details</label>
-                            <input type="text" class="form-control" id="taskDetails" value="Design and implement a clear and user-friendly menu layout for ordering">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="estimatedDuration">Estimated Duration</label>
-                            <input type="text" class="form-control" id="estimatedDuration" value="2 Days">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="deadline">Deadline</label>
-                            <input type="text" class="form-control" id="deadline" value="10th May 2024">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="taskDescription">Description</label>
-                            <input type="text" class="form-control" id="taskDescription" value="Description">
-                        </div>
-                    </div>
-                </form>
-            </div>
+
+    <!-- Project Card 2 -->
+    <div class="project-card">
+        <h5 class="mb-0" onclick="toggleTasks(2)" style="cursor: pointer;">
+        Data Science Project
+        </h5>
+        <div id="task-list-2" class="task-list">
+        <ul class="list-group mt-3">
+            <li class="list-group-item">
+                <strong>Task:</strong> Data Cleaning<br>
+                <strong>Duration:</strong> 5 Days<br>
+                <strong>Deadline:</strong> 20th May 2024
+                <strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et sapien vitae nisi tempus tincidunt. Nullam in ex urna. Nunc non consectetur arcu. Maecenas pharetra, nulla et vehicula accumsan, velit nunc efficitur diam, vel rutrum velit erat eu felis. Proin posuere ultrices augue. Morbi ultricies eleifend laoreet. Donec pharetra enim et suscipit consequat. In at dictum nisi. Aenean eget odio leo. Maecenas nec egestas mauris, ut venenatis massa. Fusce quis nulla varius, venenatis lacus vel, accumsan nisl. Ut mattis fringilla auctor. Duis vitae erat ac dolor commodo rutrum non sed diam.
+            </li>
+        </ul>
         </div>
     </div>
 </div>

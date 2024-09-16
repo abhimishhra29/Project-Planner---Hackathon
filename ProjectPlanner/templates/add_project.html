@@ -7,33 +7,29 @@
     Project Planner
 {% endblock %}
 {% block page_content %}
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Submit your assignment</h6>
-    </div>
+<div class="card shadow">
     <div class="card-body">
-        <form>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Name</label>
-                    <input type="text" class="form-control" id="assignmentName" placeholder="Name of assignment">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="datepicker">Due Date:</label>
-                    <input type="text" class="form-control" id="datepicker">
-                </div>
+        <h5 class="card-title">Enter Project Details</h5>
+        <form class="row g-3">
+            <div class="col-6">
+                <label for="inputNanme4" class="form-label">Enter Project Name</label>
+                <input type="text" class="form-control" id="inputNanme4" placeholder="Deep Learning Assignment 3">
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEfforts">Estimated Efforts</label>
-                    <input type="text" class="form-control" id="totalEfforts" placeholder="Estimated required time (days)">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="exampleFormControlFile1">Upload PDF</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                </div>
+            <div class="col-6">
+                <label for="inputEfforts" class="form-label">Estimated Efforts</label>
+                <input type="text" class="form-control" id="inputEfforts" placeholder="Estimated required time (days)">
             </div>
-            <button class="btn btn-primary">Extract detailed breakdown</button>
+            <div class="col-6">
+                <label for="inputDate" class="form-label">Due Date</label>
+                <input type="date" class="form-control" id="inputDate" placeholder="Select Project Due Date">
+            </div>
+            <div class="col-6">
+                <label for="formFile" class="form-label">Upload TDD/Project Design</label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Create Project Plan</button>
+            </div>
         </form>
     </div>
 </div>
