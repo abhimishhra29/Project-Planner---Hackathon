@@ -10,42 +10,32 @@
 
 {% block page_content %}
 <div class="container mt-5">
-    <!-- Project Card 1 -->
-    <div class="project-card">
-        <h5 class="mb-0" onclick="toggleTasks(1)" style="cursor: pointer;">
-        Machine Learning Computing
-        </h5>
-        <div id="task-list-1" class="task-list">
-        <ul class="list-group mt-3">
-            <li class="list-group-item">
-                <strong>Task:</strong> Design Menu Layout<br>
-                <strong>Duration:</strong> 2 Days<br>
-                <strong>Deadline:</strong> 10th May 2024
-            </li>
-            <li class="list-group-item">
-                <strong>Task:</strong> Design Menu Layout<br>
-                <strong>Duration:</strong> 2 Days<br>
-                <strong>Deadline:</strong> 10th May 2024
-            </li>
-        </ul>
-        </div>
-    </div>
 
-    <!-- Project Card 2 -->
+    {% for project in projects %}
+    <!-- Project Card -->
     <div class="project-card">
-        <h5 class="mb-0" onclick="toggleTasks(2)" style="cursor: pointer;">
-        Data Science Project
+        <h5 class="mb-0" onclick="toggleTasks({{ forloop.counter }})" style="cursor: pointer;">
+        {{ project.project_name }}
         </h5>
-        <div id="task-list-2" class="task-list">
-        <ul class="list-group mt-3">
-            <li class="list-group-item">
-                <strong>Task:</strong> Data Cleaning<br>
-                <strong>Duration:</strong> 5 Days<br>
-                <strong>Deadline:</strong> 20th May 2024<br>
-                <strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et sapien vitae nisi tempus tincidunt. Nullam in ex urna. Nunc non consectetur arcu. Maecenas pharetra, nulla et vehicula accumsan, velit nunc efficitur diam, vel rutrum velit erat eu felis. Proin posuere ultrices augue. Morbi ultricies eleifend laoreet. Donec pharetra enim et suscipit consequat. In at dictum nisi. Aenean eget odio leo. Maecenas nec egestas mauris, ut venenatis massa. Fusce quis nulla varius, venenatis lacus vel, accumsan nisl. Ut mattis fringilla auctor. Duis vitae erat ac dolor commodo rutrum non sed diam.
-            </li>
-        </ul>
+        <div id="task-list-{{ forloop.counter }}" class="task-list" style="display:none;">
+            <ul class="list-group mt-3">
+                {% for task in project.tasks.all %}
+                <li class="list-group-item">
+                    <strong>Task:</strong> {{ task.task_name }}<br>
+                    <strong>Duration:</strong> {{ task.efforts }} Days<br>
+                    <strong>Deadline:</strong> {{ task.deadline|date:"jS F Y" }}<br>
+
+                    <!-- Steps for the Task -->
+                    <ul>
+                        {% for step in task.steps.all %}
+                        <li>{{ step.step_description }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
+    {% endfor %}
 </div>
 {% endblock %}

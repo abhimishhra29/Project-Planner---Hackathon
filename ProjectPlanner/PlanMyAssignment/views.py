@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 import tempfile
+import os
+from datetime import datetime
+import json
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain.document_loaders import PyMuPDFLoader
 from langchain.vectorstores import FAISS
@@ -10,12 +13,21 @@ from langchain.tools.retriever import create_retriever_tool
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain import LLMChain
 
+from .serializers import ProjectSerializer
+from .models import Project
+
 # Create your views here.
 def home(request):
     return render(request, "base.html")
 
 def projects(request):
-    return render(request, "projects.html")
+    all_projects = Project.objects.prefetch_related('tasks__steps').all()
+
+    # Pass the project data to the template
+    context = {
+        'projects': all_projects
+    }
+    return render(request, 'projects.html', context)
 
 def add_project(request):
     if request.method == "POST":
@@ -47,14 +59,23 @@ def add_project(request):
             - Verify that every task aligns with the project’s requirements and constraints.
             - Address all critical aspects, including timelines, budget considerations, and quality standards.
 
-
         5. **Final Review and Validation**:
             - After outlining the WBS, perform a thorough review to ensure completeness and accuracy.
             - Validate that the WBS covers all aspects of the project and adheres to the guidelines provided.
 
-        6. **The Response must be a structured JSON Object
+        6. **The deadline for the Project is {} and start date is {}.
+            - All the tasks must be completed within the given timeline.
+            - The date format is %Y-%m-%d.
+
+        7. **The Response must be a only a single structured JSON Object following below criteria
+            - A single dictionary object.
+            - Dictionary object must have a key names "tasks" (Array of dictionary objects).
+            - Each Task dictionary object must have keys "task_id" (Integer), "task_name", "efforts" (Required efforts to complete the task in days), "steps" (Array of Objects - Each object must have a key "step_description" (Step description required to complete the step)), "deadline" (A deadline for each task).
+
+        8. **Apart from the JSON the object, response must not contain any other text. This is highly important!
         The goal is to provide a structured, actionable plan that ensures the successful execution of the project. Ensure that the WBS is clear, detailed, and provides a roadmap that can be easily followed by the project team.
-        """
+        """.format(request.POST.get("dueDate"), datetime.now().strftime("%Y-%m-%d"))
+
         prompt = ChatPromptTemplate.from_messages(
             [
                 ("system", context_system_template),
@@ -93,18 +114,14 @@ def add_project(request):
             "chat_history": chat_history,
             "agent_scratchpad": "",  # This might be required depending on your agent setup
         }
-
+        os.remove(temp_file_path)
         # Execute the agent with the input
         response = agent_executor.invoke(inputs)
-
-        print(response['output'])
-
-        data = request.POST
-        print(data.get("projectName"))
+        data = json.loads(response['output'])
+        data["project_name"] = request.POST.get("projectName")
+        data["project_deadline"] = request.POST.get("dueDate")
+        serializer = ProjectSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
         return redirect("list_projects")
     return render(request, "add_project.html")
-
-def handle_uploaded_file(f):
-    with open("", "wb+") as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
