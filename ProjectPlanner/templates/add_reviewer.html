@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block page_heading %}
+    Create New Grader
+{% endblock %}
+{% block heading_content %}
+    Project Planner
+{% endblock %}
+{% block page_content %}
+<div class="card shadow">
+    <div class="card-body">
+        <h5 class="card-title">Enter Project Grading Details</h5>
+        <form method="post" class="row g-3" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-6">
+                <label for="inputNanme4" class="form-label">Enter Grading Name</label>
+                <input type="text" class="form-control" id="inputNanme4" name="graderName" placeholder="Deep Learning Assignment 1">
+            </div>
+            <div class="col-6">
+                <label for="formFile" class="form-label">Assignment Question</label>
+                <input class="form-control" type="file" id="assignmentFile" name="assignmentFile">
+            </div>
+            <div class="col-6">
+                <label for="formFile" class="form-label">Assignment Rubrics</label>
+                <input class="form-control" type="file" id="rubricsFile" name="rubricsFile">
+            </div>
+            <div class="col-6">
+                <label for="formFile" class="form-label">Sample Solution</label>
+                <input class="form-control" type="file" id="sampleFile" name="sampleFile">
+            </div>
+            <div class="col-6">
+                <label for="formFile" class="form-label">Assignment Solution</label>
+                <input class="form-control" type="file" id="solutionFile" name="solutionFile">
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-success">Generate Project Grading</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
