@@ -17,11 +17,12 @@ class Step(models.Model):
 
 class Grading(models.Model):
     grader_name = models.CharField(max_length=255)
+    description = models.TextField()
 
-class Part(models.Model):
-    grading = models.ForeignKey(Grading, related_name="parts", on_delete=models.CASCADE)
-    part_id = models.IntegerField()
-    part_name = models.CharField(max_length=255)
-    part_review = models.CharField(max_length=2000)
-    part_student_score = models.IntegerField()
-    part_score = models.IntegerField()
+# class Part(models.Model):
+#     grading = models.ForeignKey(Grading, related_name="parts", on_delete=models.CASCADE)
+#     part_id = models.IntegerField()
+#     part_name = models.CharField(max_length=255)
+#     part_review = models.CharField(max_length=2000)
+#     part_student_score = models.IntegerField()
+#     part_score = models.IntegerField()

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Project, Task, Step, Grading, Part
+from .models import Project, Task, Step, Grading
 
 class StepSerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,27 +37,27 @@ class ProjectSerializer(serializers.ModelSerializer):
                 Step.objects.create(task=task, **step_data)
         return project
 
-class PartSerializer(serializers.ModelSerializer):
+# class PartSerializer(serializers.ModelSerializer):
     
-    class Meta:
-        model = Part
-        fields = ['part_id', 'part_name', 'part_review', 'part_student_score', 'part_score']
+#     class Meta:
+#         model = Part
+#         fields = ['part_id', 'part_name', 'part_review', 'part_student_score', 'part_score']
 
-    def create(self, validated_data):
-        part = Part.objects.create(**validated_data)
-        return part
+#     def create(self, validated_data):
+#         part = Part.objects.create(**validated_data)
+#         return part
 
 class GradingSerializer(serializers.ModelSerializer):
-    parts = PartSerializer(many=True)
+    # parts = PartSerializer(many=True)
 
     class Meta:
         model = Grading
-        fields = ['grader_name', 'parts']
+        fields = ['grader_name', 'description']
 
-    def create(self, validated_data):
-        parts_data = validated_data.pop('parts')
-        grading = Grading.objects.create(**validated_data)
-        for part_data in parts_data:
-            Part.objects.create(project=grading, **part_data)
-        return grading
+    # def create(self, validated_data):
+    #     parts_data = validated_data.pop('parts')
+    #     grading = Grading.objects.create(**validated_data)
+    #     for part_data in parts_data:
+    #         Part.objects.create(grading=grading, **part_data)
+    #     return grading
 

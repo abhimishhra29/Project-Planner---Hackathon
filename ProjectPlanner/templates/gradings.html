@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_heading %}
+    Grading Summary
+{% endblock %}
+
+{% block heading_content %}
+    List Grades
+{% endblock %}
+
+{% block page_content %}
+<div class="container mt-5">
+
+    {% for grading in gradings %}
+    <!-- Project Card -->
+    <div class="project-card">
+        <h5 class="mb-0" onclick="toggleTasks({{ forloop.counter }})" style="cursor: pointer;">
+        {{ grading.grader_name }}
+        </h5>
+        <div id="task-list-{{ forloop.counter }}" class="task-list" style="display:none;">
+            <p>{{ grading.description|linebreaksbr }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

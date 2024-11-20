@@ -15,7 +15,7 @@ from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain import LLMChain
 
 from .serializers import ProjectSerializer, GradingSerializer
-from .models import Project
+from .models import Project, Grading
 
 # Create your views here.
 def home(request):
@@ -31,13 +31,13 @@ def projects(request):
     return render(request, 'projects.html', context)
 
 def reviews(request):
-    all_projects = Project.objects.prefetch_related('tasks__steps').all()
+    all_gradings = Grading.objects.all()
 
-    # Pass the project data to the template
+    # Pass the grading data to the template
     context = {
-        'projects': all_projects
+        'gradings': all_gradings
     }
-    return render(request, 'projects.html', context)
+    return render(request, 'gradings.html', context)
 
 def add_project(request):
     if request.method == "POST":
@@ -247,15 +247,6 @@ def add_reviewer(request):
             6. **Output**:
             - Return the total marks awarded and detailed feedback for the student.
             - Ensure that the output is clear, precise, and easy for the student to understand.
-            - Ensure the response must be a single structured JSON Object following rule 7.
-
-            7. **The Response must be only a single structured JSON Object following the below criteria**:
-            - A single dictionary object.
-            - Dictionary object must have a key names "total_marks" (String - "'sum of marks obtained for each part/total marks)
-            - Dictionary object must have a key names "feedback" (feedback on the evaluated assignment).
-            - Dictionary object must have a key names "parts" (Array of dictionary objects).
-            - Each Task dictionary object must have keys "part_id" (Integer), "part_name", "part_review" (Strings - It can contain a single string), "part_student_score" (Integer - score for the part based on evaluation), "part_score" (Integer - score for the part according to rubrics).
-
 
             Guidelines:
             - Ensure fairness and consistency in grading.
@@ -293,8 +284,12 @@ def add_reviewer(request):
         }
 
         response = agent_executor.invoke(inputs)
-
-        data = extract_json(response['output'])
+        print("I got below response")
+        print(response['output'])
+        # data = extract_json(response['output'])
+        data = {
+            "description": response['output'],
+        }
         data["grader_name"] = request.POST.get("graderName")
         serializer = GradingSerializer(data=data)
         if serializer.is_valid():
@@ -303,12 +298,15 @@ def add_reviewer(request):
 
     return render(request, "add_reviewer.html")
 
-def extract_json(text):
-    start_marker = "{"
-    end_marker = "}"
+# def extract_json(text):
+#     start_marker = "{"
+#     end_marker = "}"
     
-    # Find the start and end of the JSON content in the text
-    start_index = text.find(start_marker)
-    end_index = text.rfind(end_marker) + 1
-    json_str = text[start_index:end_index]
-    return json.loads(json_str)
+#     # Find the start and end of the JSON content in the text
+#     start_index = text.find(start_marker)
+#     end_index = text.rfind(end_marker) + 1
+#     json_str = text[start_index:end_index]
+#     print("Check below extracted Json")
+#     print(json_str)
+#     print("Json ends")
+#     return json.loads(json_str)
