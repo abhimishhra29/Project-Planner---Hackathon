@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="Tushar Deshmukh" />
-        <title>Dashboard - SB Admin</title>
+        <title>Project Planner</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -50,24 +50,24 @@
                             </a>
                             <div class="sb-sidenav-menu-heading">Features</div>
                             <a class="nav-link" href="{% url 'create_project' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-project-diagram"></i></div>
                                 Create Project Plan
                             </a>
                             <a class="nav-link" href="{% url 'list_projects' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
                                 Projects
                             </a>
                             <a class="nav-link" href="{% url 'create_reviewer' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
                                 Project Grading
                             </a>
                             <a class="nav-link" href="{% url 'list_gradings' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-bar"></i></div>
                                 Grading Results
                             </a>
                             <div class="sb-sidenav-menu-heading">Connect</div>
                             <a class="nav-link" href="{% url 'list_projects' %}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fab fa-jira"></i></div>
                                 Jira
                             </a>
                         </div>
