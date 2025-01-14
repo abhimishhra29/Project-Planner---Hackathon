@@ -271,7 +271,7 @@ def add_reviewer(request):
             ]
         )
         llm = ChatOpenAI(
-            model="gpt-4",  # Specify the model you want to use
+            model="gpt-4o-mini",  # Specify the model you want to use
             temperature=0.7  # Adjust the temperature based on your needs
         )
         tools = [question_retriever] + [solution_retriever] + [retriever_require_grading] + [rubric_retriever]
