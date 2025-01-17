@@ -240,7 +240,8 @@ def add_reviewer(request):
             4. **Mark Allocation**:
             - Assign marks for each part based on the marking rubric and accuracy of the student's response.
             - Accurately sum the marks for all parts to calculate the total score, ensuring it does not exceed the maximum allocated marks.
-            - Perform a secondary check to validate the total score calculation.
+            - Primary Calculation: Accurately sum the marks for all parts to calculate the total score.
+            - Secondary Validation: Perform a secondary check to validate each section’s marks and recheck the total score by aggregating and recalculating the total marks twice.
 
             5. **Feedback Generation**:
             - Provide specific feedback for each part, indicating where the student excelled or where improvements are needed.
@@ -249,6 +250,7 @@ def add_reviewer(request):
             6. **Output**:
             - Return the total marks awarded and detailed feedback for the student.
             - Ensure that the output is clear, precise, and easy for the student to understand.
+            - write the output in json format eg. [assignment_no[question_no: [maximum_marks, allotted_marks, feedback,], total score]
 
             Guidelines:
             - Ensure fairness and consistency in grading.
