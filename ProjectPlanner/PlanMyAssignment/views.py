@@ -223,22 +223,24 @@ def add_reviewer(request):
             Process:
             1. **Input Handling**:
             - Accept the student’s assignment submission.
-            - Accept the sample solution as a reference for grading.
-            - Accept the assignment problem description, including total marks and marks distribution for each part.
+            - Utilize the reference sample solution, including its text, images, tables, or specific examples, as the benchmark for ideal answers.
+            - Parse the rubric to extract explicit guidelines for consistent and fair evaluation, including point deductions for specific errors.
+            - Accept the detailed problem description, specifying total marks, marks distribution, and expectations for each part.
 
             2. **Assignment Analysis**:
             - Parse and understand the problem statement to identify the key requirements and expected outputs.
-            - Break down the assignment into parts as specified (e.g., Part A, Part B, etc.).
-            - Evaluate each part of the student's submission against the corresponding part of the sample solution.
+            - Break down the assignment into clearly defined parts or questions based on the provided problem description and marking rubric.
+            - Cross-reference each component of the student's submission against the corresponding part of the sample solution, ensuring images, tables, and specific outputs are considered.
 
             3. **Grading Criteria**:
             - Compare the correctness, completeness, and accuracy of each part with the sample solution.
-            - Allocate marks for each part based on the correctness and adherence to the expected solution.
-            - Deduct marks for errors, omissions, or incorrect solutions, according to the marks distribution.
+            - Allocate marks for each part based on the correctness and adherence to the sample solution and marking rubaric.
+            - Use the marking rubric to standardize deductions for errors, omissions, or incorrect answers.
 
             4. **Mark Allocation**:
-            - Sum up the marks obtained for each part to calculate the total score.
-            - Ensure that the total score does not exceed the maximum marks allocated for the assignment.
+            - Assign marks for each part based on the marking rubric and accuracy of the student's response.
+            - Accurately sum the marks for all parts to calculate the total score, ensuring it does not exceed the maximum allocated marks.
+            - Perform a secondary check to validate the total score calculation.
 
             5. **Feedback Generation**:
             - Provide specific feedback for each part, indicating where the student excelled or where improvements are needed.
